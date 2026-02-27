@@ -28,7 +28,6 @@
       overflow-x: hidden;
     }
 
-    /* ── NAV ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -84,7 +83,6 @@
 
     .nav-cta:hover { background: var(--brown); transform: translateY(-1px); }
 
-    /* ── HERO ── */
     .hero {
       min-height: 100vh;
       display: grid;
@@ -202,7 +200,6 @@
 
     .btn-secondary:hover::after { transform: translateX(4px); }
 
-    /* Hero image side */
     .hero-visual {
       position: relative;
       z-index: 1;
@@ -231,13 +228,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    .hero-card-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 5rem;
-      color: rgba(255,255,255,0.5);
-      font-style: italic;
+      overflow: hidden;
     }
 
     .hero-badge {
@@ -280,19 +271,15 @@
       animation: float 5s ease-in-out infinite reverse;
     }
 
-    /* ── ABOUT STRIP ── */
     .about-strip {
       background: var(--sand);
       padding: 3rem 6rem;
       display: flex;
       justify-content: center;
       gap: 5rem;
-      animation: fadeUp 0.8s ease both;
     }
 
-    .strip-item {
-      text-align: center;
-    }
+    .strip-item { text-align: center; }
 
     .strip-num {
       font-family: 'Cormorant Garamond', serif;
@@ -309,15 +296,9 @@
       color: var(--text-light);
     }
 
-    /* ── SERVICES ── */
-    .services {
-      padding: 7rem 6rem;
-    }
+    .services { padding: 7rem 6rem; }
 
-    .section-header {
-      text-align: center;
-      margin-bottom: 4rem;
-    }
+    .section-header { text-align: center; margin-bottom: 4rem; }
 
     .section-tag {
       font-size: 0.72rem;
@@ -414,7 +395,6 @@
       margin-left: 0.3rem;
     }
 
-    /* ── QUOTE SECTION ── */
     .quote-section {
       background: linear-gradient(135deg, var(--blush) 0%, var(--sand) 100%);
       padding: 6rem;
@@ -455,7 +435,6 @@
       color: var(--text-light);
     }
 
-    /* ── BOOKING ── */
     .booking {
       padding: 7rem 6rem;
       display: grid;
@@ -464,9 +443,7 @@
       align-items: center;
     }
 
-    .booking-content h2 {
-      margin-bottom: 1rem;
-    }
+    .booking-content h2 { margin-bottom: 1rem; }
 
     .booking-content p {
       font-size: 0.95rem;
@@ -476,10 +453,7 @@
       margin-bottom: 2rem;
     }
 
-    .booking-perks {
-      list-style: none;
-      margin-bottom: 2.5rem;
-    }
+    .booking-perks { list-style: none; margin-bottom: 2.5rem; }
 
     .booking-perks li {
       display: flex;
@@ -498,7 +472,6 @@
       flex-shrink: 0;
     }
 
-    /* Booking form */
     .booking-form {
       background: white;
       border-radius: 32px;
@@ -514,9 +487,7 @@
       margin-bottom: 2rem;
     }
 
-    .form-group {
-      margin-bottom: 1.4rem;
-    }
+    .form-group { margin-bottom: 1.4rem; }
 
     .form-group label {
       display: block;
@@ -542,9 +513,7 @@
     }
 
     .form-group input:focus,
-    .form-group select:focus {
-      border-color: var(--rose);
-    }
+    .form-group select:focus { border-color: var(--rose); }
 
     .form-row {
       display: grid;
@@ -571,7 +540,6 @@
 
     .btn-book:hover { background: var(--brown); transform: translateY(-1px); }
 
-    /* ── FOOTER ── */
     footer {
       background: var(--brown);
       color: rgba(255,255,255,0.7);
@@ -610,13 +578,8 @@
       margin-bottom: 1.2rem;
     }
 
-    .footer-col ul {
-      list-style: none;
-    }
-
-    .footer-col li {
-      margin-bottom: 0.6rem;
-    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 0.6rem; }
 
     .footer-col a {
       color: rgba(255,255,255,0.6);
@@ -636,7 +599,6 @@
       font-size: 0.78rem;
     }
 
-    /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
@@ -663,26 +625,19 @@
       transform: translateY(0);
     }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       nav { padding: 1.2rem 1.5rem; }
       .nav-links { display: none; }
-
       .hero { grid-template-columns: 1fr; padding: 6rem 2rem 3rem; text-align: center; }
       .hero-content { padding: 2rem; }
       .hero-desc { margin: 0 auto 2rem; }
       .hero-actions { justify-content: center; }
       .hero-visual { display: none; }
-
       .about-strip { padding: 2.5rem 2rem; gap: 2.5rem; flex-wrap: wrap; }
-
       .services { padding: 5rem 2rem; }
       .services-grid { grid-template-columns: 1fr; }
-
       .quote-section { padding: 4rem 2rem; }
-
       .booking { grid-template-columns: 1fr; padding: 5rem 2rem; gap: 3rem; }
-
       footer { padding: 3rem 2rem 2rem; }
       .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
     }
@@ -690,7 +645,6 @@
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <a href="#" class="logo">Jalla</a>
     <ul class="nav-links">
@@ -702,7 +656,6 @@
     <a href="#booking" class="nav-cta">Boka nu</a>
   </nav>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-content">
@@ -717,7 +670,7 @@
     <div class="hero-visual">
       <div class="hero-card">
         <div class="hero-card-inner">
-          <span class="hero-card-text">J</span>
+          <img src="https://hej-hub.github.io/JallaMassage/massage.png" alt="Jalla Massage" style="width:100%; height:100%; object-fit:cover;" />
         </div>
       </div>
       <div class="hero-badge">
@@ -731,7 +684,6 @@
     </div>
   </section>
 
-  <!-- STRIP -->
   <div class="about-strip fade-up">
     <div class="strip-item">
       <span class="strip-num">8+</span>
@@ -751,7 +703,6 @@
     </div>
   </div>
 
-  <!-- SERVICES -->
   <section class="services" id="services">
     <div class="section-header fade-up">
       <div class="section-tag">Våra behandlingar</div>
@@ -762,66 +713,46 @@
         <div class="service-icon">🫶</div>
         <h3>Klassisk Massage</h3>
         <p>En djupt avslappnande helkroppsmassage med mjuka, flödande rörelser som löser upp spänningar och förbättrar cirkulationen.</p>
-        <div>
-          <span class="service-price">600 kr</span>
-          <span class="service-duration">/ 60 min</span>
-        </div>
+        <div><span class="service-price">600 kr</span><span class="service-duration">/ 60 min</span></div>
       </div>
       <div class="service-card fade-up" style="transition-delay:0.1s">
         <div class="service-icon">🪨</div>
         <h3>Varm Sten Massage</h3>
         <p>Vulkaniska stenar värms upp och används för att mjuka upp musklerna på djupet. En luxuös upplevelse för kropp och sinne.</p>
-        <div>
-          <span class="service-price">850 kr</span>
-          <span class="service-duration">/ 75 min</span>
-        </div>
+        <div><span class="service-price">850 kr</span><span class="service-duration">/ 75 min</span></div>
       </div>
       <div class="service-card fade-up" style="transition-delay:0.2s">
         <div class="service-icon">🌸</div>
         <h3>Aromaterapi</h3>
         <p>En sinnlig massageupplevelse med noggrant utvalda eteriska oljor som balanserar kropp, sinne och ande i perfekt harmoni.</p>
-        <div>
-          <span class="service-price">750 kr</span>
-          <span class="service-duration">/ 60 min</span>
-        </div>
+        <div><span class="service-price">750 kr</span><span class="service-duration">/ 60 min</span></div>
       </div>
       <div class="service-card fade-up" style="transition-delay:0.3s">
         <div class="service-icon">💆</div>
         <h3>Ansiktsmassage</h3>
         <p>En lyxig behandling som stimulerar ansiktets muskler, förbättrar hudtonen och skapar en innerlig känsla av frisknande.</p>
-        <div>
-          <span class="service-price">450 kr</span>
-          <span class="service-duration">/ 45 min</span>
-        </div>
+        <div><span class="service-price">450 kr</span><span class="service-duration">/ 45 min</span></div>
       </div>
       <div class="service-card fade-up" style="transition-delay:0.4s">
         <div class="service-icon">🤸</div>
         <h3>Sportmassage</h3>
         <p>Anpassad för aktiva och idrottare. Fokuserar på muskelåterhämtning, rörlighet och att förebygga framtida skador.</p>
-        <div>
-          <span class="service-price">700 kr</span>
-          <span class="service-duration">/ 60 min</span>
-        </div>
+        <div><span class="service-price">700 kr</span><span class="service-duration">/ 60 min</span></div>
       </div>
       <div class="service-card fade-up" style="transition-delay:0.5s">
         <div class="service-icon">🤰</div>
         <h3>Gravidmassage</h3>
         <p>En skonsam och stödjande massage speciellt utformad för gravida. Lindrar vanliga graviditetsbesvär och ger djup avkoppling.</p>
-        <div>
-          <span class="service-price">650 kr</span>
-          <span class="service-duration">/ 60 min</span>
-        </div>
+        <div><span class="service-price">650 kr</span><span class="service-duration">/ 60 min</span></div>
       </div>
     </div>
   </section>
 
-  <!-- QUOTE -->
   <section class="quote-section fade-up">
     <p class="quote-text">"Varje besök hos Jalla är en resa mot djup avkoppling och välmående. Låt oss ta hand om dig."</p>
     <span class="quote-author">— Jalla Massage Team</span>
   </section>
 
-  <!-- BOOKING -->
   <section class="booking" id="booking">
     <div class="booking-content fade-up">
       <div class="section-tag" style="justify-content:flex-start">Boka tid</div>
@@ -887,7 +818,6 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer id="contact">
     <div class="footer-top">
       <div>
@@ -930,7 +860,6 @@
   </footer>
 
   <script>
-    // Scroll fade-in
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) e.target.classList.add('visible');
