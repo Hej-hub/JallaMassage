@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jalla — Massage & Välmående</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #faf7f2;
+      --sand: #f0e8da;
+      --blush: #e8d5c4;
+      --rose: #c9a898;
+      --terracotta: #b07060;
+      --brown: #6b4c3b;
+      --text: #3a2e28;
+      --text-light: #8a6e63;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 3rem;
+      background: rgba(250,247,242,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,152,0.2);
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      color: var(--brown);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--terracotta); }
+
+    .nav-cta {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.65rem 1.6rem;
+      background: var(--terracotta);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .nav-cta:hover { background: var(--brown); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 70% at 75% 50%, var(--blush) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, var(--sand) 0%, transparent 60%);
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 4rem 3rem 4rem 6rem;
+      animation: fadeUp 1s ease both;
+    }
+
+    .hero-tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .hero-tag::before {
+      content: '';
+      display: inline-block;
+      width: 32px;
+      height: 1px;
+      background: var(--terracotta);
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 5vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--brown);
+      margin-bottom: 1.5rem;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--terracotta);
+    }
+
+    .hero-desc {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--text-light);
+      max-width: 420px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      padding: 1rem 2.2rem;
+      background: var(--terracotta);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+      box-shadow: 0 8px 24px rgba(176,112,96,0.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--brown);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(107,76,59,0.3);
+    }
+
+    .btn-secondary {
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.3s;
+    }
+
+    .btn-secondary:hover { color: var(--terracotta); }
+
+    .btn-secondary::after {
+      content: '→';
+      transition: transform 0.3s;
+    }
+
+    .btn-secondary:hover::after { transform: translateX(4px); }
+
+    /* Hero image side */
+    .hero-visual {
+      position: relative;
+      z-index: 1;
+      padding: 4rem 4rem 4rem 2rem;
+      display: flex;
+      justify-content: center;
+      animation: fadeIn 1.2s ease both;
+    }
+
+    .hero-card {
+      width: 100%;
+      max-width: 440px;
+      aspect-ratio: 3/4;
+      background: linear-gradient(145deg, var(--blush), var(--sand));
+      border-radius: 200px 200px 40px 40px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(107,76,59,0.18);
+    }
+
+    .hero-card-inner {
+      position: absolute;
+      inset: 12px;
+      border-radius: 190px 190px 30px 30px;
+      background: linear-gradient(160deg, #e8d5c4 0%, #d4b8a8 50%, #c0a090 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-card-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      color: rgba(255,255,255,0.5);
+      font-style: italic;
+    }
+
+    .hero-badge {
+      position: absolute;
+      bottom: 2rem;
+      left: -1.5rem;
+      background: white;
+      border-radius: 16px;
+      padding: 1rem 1.4rem;
+      box-shadow: 0 8px 32px rgba(107,76,59,0.15);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .badge-icon {
+      width: 42px; height: 42px;
+      background: var(--sand);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    .badge-text { font-size: 0.75rem; line-height: 1.4; }
+    .badge-text strong { display: block; color: var(--brown); font-weight: 500; }
+    .badge-text span { color: var(--text-light); }
+
+    .hero-badge2 {
+      position: absolute;
+      top: 3rem;
+      right: -1.2rem;
+      background: var(--terracotta);
+      color: white;
+      border-radius: 50px;
+      padding: 0.7rem 1.2rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      box-shadow: 0 8px 24px rgba(176,112,96,0.3);
+      animation: float 5s ease-in-out infinite reverse;
+    }
+
+    /* ── ABOUT STRIP ── */
+    .about-strip {
+      background: var(--sand);
+      padding: 3rem 6rem;
+      display: flex;
+      justify-content: center;
+      gap: 5rem;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .strip-item {
+      text-align: center;
+    }
+
+    .strip-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--terracotta);
+      display: block;
+    }
+
+    .strip-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    /* ── SERVICES ── */
+    .services {
+      padding: 7rem 6rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-tag::before, .section-tag::after {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background: var(--terracotta);
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+      font-weight: 300;
+      color: var(--brown);
+      line-height: 1.2;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: 24px;
+      padding: 2.5rem;
+      border: 1px solid rgba(201,168,152,0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blush), var(--rose));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(107,76,59,0.12); }
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-icon {
+      width: 56px; height: 56px;
+      background: var(--sand);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--brown);
+      margin-bottom: 0.8rem;
+    }
+
+    .service-card p {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: var(--text-light);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      color: var(--terracotta);
+    }
+
+    .service-duration {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      margin-left: 0.3rem;
+    }
+
+    /* ── QUOTE SECTION ── */
+    .quote-section {
+      background: linear-gradient(135deg, var(--blush) 0%, var(--sand) 100%);
+      padding: 6rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-section::before {
+      content: '❝';
+      position: absolute;
+      top: -1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 18rem;
+      color: rgba(201,168,152,0.15);
+      font-family: 'Cormorant Garamond', serif;
+      line-height: 1;
+    }
+
+    .quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--brown);
+      max-width: 760px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.5;
+      position: relative;
+      z-index: 1;
+    }
+
+    .quote-author {
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    /* ── BOOKING ── */
+    .booking {
+      padding: 7rem 6rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .booking-content h2 {
+      margin-bottom: 1rem;
+    }
+
+    .booking-content p {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--text-light);
+      font-weight: 300;
+      margin-bottom: 2rem;
+    }
+
+    .booking-perks {
+      list-style: none;
+      margin-bottom: 2.5rem;
+    }
+
+    .booking-perks li {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.6rem 0;
+      font-size: 0.9rem;
+      color: var(--text);
+      border-bottom: 1px solid rgba(201,168,152,0.2);
+    }
+
+    .perk-dot {
+      width: 8px; height: 8px;
+      background: var(--terracotta);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Booking form */
+    .booking-form {
+      background: white;
+      border-radius: 32px;
+      padding: 3rem;
+      box-shadow: 0 24px 64px rgba(107,76,59,0.1);
+    }
+
+    .booking-form h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--brown);
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.4rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.73rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 0.9rem 1.1rem;
+      border: 1.5px solid var(--blush);
+      border-radius: 12px;
+      background: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--rose);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .btn-book {
+      width: 100%;
+      padding: 1.1rem;
+      background: var(--terracotta);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background 0.3s, transform 0.2s;
+      box-shadow: 0 8px 24px rgba(176,112,96,0.25);
+    }
+
+    .btn-book:hover { background: var(--brown); transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--brown);
+      color: rgba(255,255,255,0.7);
+      padding: 4rem 6rem 2.5rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: white;
+      letter-spacing: 0.15em;
+      display: block;
+      margin-bottom: 1rem;
+      text-decoration: none;
+    }
+
+    .footer-about {
+      font-size: 0.85rem;
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    .footer-col h4 {
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--blush);
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col li {
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-col a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 300;
+      transition: color 0.3s;
+    }
+
+    .footer-col a:hover { color: var(--blush); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+
+      .hero { grid-template-columns: 1fr; padding: 6rem 2rem 3rem; text-align: center; }
+      .hero-content { padding: 2rem; }
+      .hero-desc { margin: 0 auto 2rem; }
+      .hero-actions { justify-content: center; }
+      .hero-visual { display: none; }
+
+      .about-strip { padding: 2.5rem 2rem; gap: 2.5rem; flex-wrap: wrap; }
+
+      .services { padding: 5rem 2rem; }
+      .services-grid { grid-template-columns: 1fr; }
+
+      .quote-section { padding: 4rem 2rem; }
+
+      .booking { grid-template-columns: 1fr; padding: 5rem 2rem; gap: 3rem; }
+
+      footer { padding: 3rem 2rem 2rem; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="logo">Jalla</a>
+    <ul class="nav-links">
+      <li><a href="#services">Behandlingar</a></li>
+      <li><a href="#about">Om oss</a></li>
+      <li><a href="#booking">Priser</a></li>
+      <li><a href="#contact">Kontakt</a></li>
+    </ul>
+    <a href="#booking" class="nav-cta">Boka nu</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-tag">Stockholm &nbsp;·&nbsp; Välmående</div>
+      <h1>Hitta din<br/><em>inre ro</em><br/>med oss</h1>
+      <p class="hero-desc">På Jalla erbjuder vi skräddarsydda massagebehandlingar som återställer kropp och själ. Boka din plats för ett ögonblick av ren avkoppling.</p>
+      <div class="hero-actions">
+        <a href="#booking" class="btn-primary">Boka behandling</a>
+        <a href="#services" class="btn-secondary">Utforska mer</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-inner">
+          <span class="hero-card-text">J</span>
+        </div>
+      </div>
+      <div class="hero-badge">
+        <div class="badge-icon">🌿</div>
+        <div class="badge-text">
+          <strong>100% Naturligt</strong>
+          <span>Ekologiska oljor</span>
+        </div>
+      </div>
+      <div class="hero-badge2">✦ Över 500 nöjda kunder</div>
+    </div>
+  </section>
+
+  <!-- STRIP -->
+  <div class="about-strip fade-up">
+    <div class="strip-item">
+      <span class="strip-num">8+</span>
+      <span class="strip-label">Års erfarenhet</span>
+    </div>
+    <div class="strip-item">
+      <span class="strip-num">500+</span>
+      <span class="strip-label">Nöjda kunder</span>
+    </div>
+    <div class="strip-item">
+      <span class="strip-num">12</span>
+      <span class="strip-label">Behandlingstyper</span>
+    </div>
+    <div class="strip-item">
+      <span class="strip-num">5 ★</span>
+      <span class="strip-label">Genomsnittigt betyg</span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="section-header fade-up">
+      <div class="section-tag">Våra behandlingar</div>
+      <h2>Välj din<br/>upplevelse</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <div class="service-icon">🫶</div>
+        <h3>Klassisk Massage</h3>
+        <p>En djupt avslappnande helkroppsmassage med mjuka, flödande rörelser som löser upp spänningar och förbättrar cirkulationen.</p>
+        <div>
+          <span class="service-price">600 kr</span>
+          <span class="service-duration">/ 60 min</span>
+        </div>
+      </div>
+      <div class="service-card fade-up" style="transition-delay:0.1s">
+        <div class="service-icon">🪨</div>
+        <h3>Varm Sten Massage</h3>
+        <p>Vulkaniska stenar värms upp och används för att mjuka upp musklerna på djupet. En luxuös upplevelse för kropp och sinne.</p>
+        <div>
+          <span class="service-price">850 kr</span>
+          <span class="service-duration">/ 75 min</span>
+        </div>
+      </div>
+      <div class="service-card fade-up" style="transition-delay:0.2s">
+        <div class="service-icon">🌸</div>
+        <h3>Aromaterapi</h3>
+        <p>En sinnlig massageupplevelse med noggrant utvalda eteriska oljor som balanserar kropp, sinne och ande i perfekt harmoni.</p>
+        <div>
+          <span class="service-price">750 kr</span>
+          <span class="service-duration">/ 60 min</span>
+        </div>
+      </div>
+      <div class="service-card fade-up" style="transition-delay:0.3s">
+        <div class="service-icon">💆</div>
+        <h3>Ansiktsmassage</h3>
+        <p>En lyxig behandling som stimulerar ansiktets muskler, förbättrar hudtonen och skapar en innerlig känsla av frisknande.</p>
+        <div>
+          <span class="service-price">450 kr</span>
+          <span class="service-duration">/ 45 min</span>
+        </div>
+      </div>
+      <div class="service-card fade-up" style="transition-delay:0.4s">
+        <div class="service-icon">🤸</div>
+        <h3>Sportmassage</h3>
+        <p>Anpassad för aktiva och idrottare. Fokuserar på muskelåterhämtning, rörlighet och att förebygga framtida skador.</p>
+        <div>
+          <span class="service-price">700 kr</span>
+          <span class="service-duration">/ 60 min</span>
+        </div>
+      </div>
+      <div class="service-card fade-up" style="transition-delay:0.5s">
+        <div class="service-icon">🤰</div>
+        <h3>Gravidmassage</h3>
+        <p>En skonsam och stödjande massage speciellt utformad för gravida. Lindrar vanliga graviditetsbesvär och ger djup avkoppling.</p>
+        <div>
+          <span class="service-price">650 kr</span>
+          <span class="service-duration">/ 60 min</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="quote-section fade-up">
+    <p class="quote-text">"Varje besök hos Jalla är en resa mot djup avkoppling och välmående. Låt oss ta hand om dig."</p>
+    <span class="quote-author">— Jalla Massage Team</span>
+  </section>
+
+  <!-- BOOKING -->
+  <section class="booking" id="booking">
+    <div class="booking-content fade-up">
+      <div class="section-tag" style="justify-content:flex-start">Boka tid</div>
+      <h2>Redo för<br/>din stund av ro?</h2>
+      <p>Vi välkomnar dig till ett lugnt och inbjudande rum där stress och oro lämnas bakom dörren. Välj din behandling och boka enkelt online.</p>
+      <ul class="booking-perks">
+        <li><span class="perk-dot"></span> Gratis omboka upp till 24 timmar innan</li>
+        <li><span class="perk-dot"></span> Ekologiska och certifierade oljor</li>
+        <li><span class="perk-dot"></span> Certifierade och erfarna terapeuter</li>
+        <li><span class="perk-dot"></span> Lugn och tillgänglig miljö i Stockholm</li>
+      </ul>
+      <a href="tel:+46701234567" class="btn-primary" style="display:inline-block">Ringa oss direkt</a>
+    </div>
+    <div class="booking-form fade-up">
+      <h3>Boka online</h3>
+      <form onsubmit="alert('Tack! Vi återkommer med bekräftelse.'); return false;">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Förnamn</label>
+            <input type="text" placeholder="Anna" />
+          </div>
+          <div class="form-group">
+            <label>Efternamn</label>
+            <input type="text" placeholder="Lindqvist" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>E-post</label>
+          <input type="email" placeholder="anna@example.se" />
+        </div>
+        <div class="form-group">
+          <label>Behandling</label>
+          <select>
+            <option>Klassisk Massage (60 min)</option>
+            <option>Varm Sten Massage (75 min)</option>
+            <option>Aromaterapi (60 min)</option>
+            <option>Ansiktsmassage (45 min)</option>
+            <option>Sportmassage (60 min)</option>
+            <option>Gravidmassage (60 min)</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Datum</label>
+            <input type="date" />
+          </div>
+          <div class="form-group">
+            <label>Tid</label>
+            <select>
+              <option>09:00</option>
+              <option>10:00</option>
+              <option>11:00</option>
+              <option>12:00</option>
+              <option>13:00</option>
+              <option>14:00</option>
+              <option>15:00</option>
+              <option>16:00</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn-book">Bekräfta bokning</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="footer-top">
+      <div>
+        <a href="#" class="footer-logo">Jalla</a>
+        <p class="footer-about">Jalla Massage – din fristad för avkoppling och välmående i hjärtat av Stockholm. Vi tar hand om dig med kärlek och omsorg.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Behandlingar</h4>
+        <ul>
+          <li><a href="#">Klassisk Massage</a></li>
+          <li><a href="#">Varm Sten</a></li>
+          <li><a href="#">Aromaterapi</a></li>
+          <li><a href="#">Sportmassage</a></li>
+          <li><a href="#">Gravidmassage</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Information</h4>
+        <ul>
+          <li><a href="#">Om oss</a></li>
+          <li><a href="#">Presentkort</a></li>
+          <li><a href="#">Integritetspolicy</a></li>
+          <li><a href="#">Villkor</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <ul>
+          <li><a href="#">Drottninggatan 55</a></li>
+          <li><a href="#">111 21 Stockholm</a></li>
+          <li><a href="tel:+46701234567">070-123 45 67</a></li>
+          <li><a href="mailto:hej@jallamassage.se">hej@jallamassage.se</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Jalla Massage. Alla rättigheter förbehållna.</span>
+      <span>Gjord med 🤍 i Stockholm</span>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll fade-in
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
